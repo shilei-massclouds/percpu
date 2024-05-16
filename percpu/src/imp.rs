@@ -13,7 +13,7 @@ pub fn percpu_area_size() -> usize {
         fn _percpu_load_start();
         fn _percpu_load_end();
     }
-    use percpu_macros2::percpu_symbol_offset;
+    use percpu_macros::percpu_symbol_offset;
     percpu_symbol_offset!(_percpu_load_end) - percpu_symbol_offset!(_percpu_load_start)
 }
 
@@ -116,5 +116,5 @@ pub fn set_local_thread_pointer(cpu_id: usize) {
 /// On x86, we use `gs:SELF_PTR` to store the address of the per-CPU data area base.
 #[cfg(target_arch = "x86_64")]
 #[no_mangle]
-#[percpu_macros2::def_percpu]
+#[percpu_macros::def_percpu]
 static SELF_PTR: usize = 0;
